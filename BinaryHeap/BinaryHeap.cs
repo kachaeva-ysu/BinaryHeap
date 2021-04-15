@@ -125,15 +125,40 @@ namespace BinaryHeap
             return result.ToString();
         }
 
+        public T[] SortWithRecursion(T[] sortedArray,int index=0)
+        {
+            sortedArray[index] = Heap[1];
+            Heap[1] = Heap[Count];
+            Count--;
+            index++;
+            HeapifyTopToBottom(1);
+            if(Count>0)
+                SortWithRecursion(sortedArray,index);
+            return sortedArray;
+
+        }
+        public T[] SortWithoutRecursion()
+        {
+            T[] sortedArray = new T[Count];
+            for(int i=0;i<sortedArray.Length;i++)
+            {
+                sortedArray[i] = Heap[1];
+                Heap[1] = Heap[Count];
+                Count--;
+                HeapifyTopToBottom(1);
+            }
+            return sortedArray;
+        }
+
     }
-    public class maxComparer<T> : IComparer<T> where T : IComparable
+    public class MaxComparer<T> : IComparer<T> where T : IComparable
     {
         public int Compare(T a, T b)
         {
             return a.CompareTo(b);
         }
     }
-    public class minComparer<T> : IComparer<T> where T : IComparable
+    public class MinComparer<T> : IComparer<T> where T : IComparable
     {
         public int Compare(T a, T b)
         {

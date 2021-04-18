@@ -120,7 +120,7 @@ namespace UnitTestProject
             var rnd = new Random();
             for (int i = 0; i < 100; i++)
                 heap.Insert(rnd.Next(0, 100));
-            var sortedArray = heap.SortWithRecursion(new int[heap.Count]);
+            var sortedArray = heap.SortWithRecursion();
             for (int i = 0; i < sortedArray.Length - 1; i++)
                 Assert.AreEqual(true, sortedArray[i] >= sortedArray[i + 1]);
             Assert.AreEqual(100, sortedArray.Length);

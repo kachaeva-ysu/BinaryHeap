@@ -125,7 +125,14 @@ namespace BinaryHeap
             return result.ToString();
         }
 
-        public T[] SortWithRecursion(T[] sortedArray,int index=0)
+        public T[] SortWithRecursion()
+        {
+            T[] sortedArray = new T[Count];
+            return SortWithRecursion(sortedArray, 0);
+        }
+
+
+        private T[] SortWithRecursion(T[] sortedArray,int index=0)
         {
             sortedArray[index] = Heap[1];
             Heap[1] = Heap[Count];

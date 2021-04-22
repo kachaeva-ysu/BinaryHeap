@@ -96,6 +96,25 @@ namespace BinaryHeap
             Heap[index] = temp;
             HeapifyTopToBottom(parent);
         }
+        private void HeapifyTopToBottomWithoutRecursion(int index)
+        {
+            while (true)
+            {
+                var left = 2 * index;
+                var right = 2 * index + 1;
+                var parent = index;
+                if (left <= Count && _comparer.Compare(Heap[left], Heap[index]) > 0)
+                    parent = left;
+                if (right <= Count && _comparer.Compare(Heap[right], Heap[parent]) > 0)
+                    parent = right;
+
+                if (parent == index) return;
+                var temp = Heap[parent];
+                Heap[parent] = Heap[index];
+                Heap[index] = temp;
+                index = parent;
+            }
+        }
         private void HeapifyBottomToTop(int index)
         {
             if (index <= 1) return;
@@ -132,7 +151,7 @@ namespace BinaryHeap
         }
 
 
-        private T[] SortWithRecursion(T[] sortedArray,int index=0)
+        private T[] SortWithRecursion(T[] sortedArray,int index)
         {
             sortedArray[index] = Heap[1];
             Heap[1] = Heap[Count];
@@ -152,7 +171,7 @@ namespace BinaryHeap
                 sortedArray[i] = Heap[1];
                 Heap[1] = Heap[Count];
                 Count--;
-                HeapifyTopToBottom(1);
+                HeapifyTopToBottomWithoutRecursion(1);
             }
             return sortedArray;
         }
